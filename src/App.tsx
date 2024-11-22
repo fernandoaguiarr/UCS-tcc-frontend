@@ -1,11 +1,12 @@
+import { StageManager } from "./components/stage-manager"
+import { WebSocketProvider } from "./providers/websocket-provider"
 
 function App() {
-
   return (
     <>
-      <h1 className="text-3xl font-bold underline">
-        Hello world!
-      </h1>
+      <WebSocketProvider url={import.meta.env.VITE_API_WS}>
+        <StageManager></StageManager>
+      </WebSocketProvider>
     </>
   )
 }
