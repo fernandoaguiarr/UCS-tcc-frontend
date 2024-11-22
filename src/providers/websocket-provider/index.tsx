@@ -1,4 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react';
+import ApplicationStage from '../../utils/enums/application-stage.enum';
+import WebSocketData from '../../utils/interfaces/web-socket-data.interface';
 
 const WebSocketContext = createContext<any>(null);
 
@@ -8,7 +10,7 @@ export const useWebSocket = () => {
 
 export const WebSocketProvider = ({ children, url }: any) => {
   const [socket, setSocket] = useState<WebSocket | null>(null);
-  const [messages, setMessages] = useState<any[]>([]);
+  const [message, setMessage] = useState<any>(null);
 
   useEffect(() => {
     const ws = new WebSocket(url);
@@ -17,8 +19,8 @@ export const WebSocketProvider = ({ children, url }: any) => {
       console.log("Conexão WebSocket aberta.");
     };
 
-    ws.onmessage = (event) => {
-      setMessages(() => JSON.parse(event.data));
+    ws.onmessage = (event: any) => {
+      setMessage(JSON.parse(event.data));
     };
 
     ws.onerror = (error) => {
@@ -35,16 +37,24 @@ export const WebSocketProvider = ({ children, url }: any) => {
     return () => ws.close();
   }, [url]);
 
-  const sendMessage = (message: any) => {
+  const sendMessage = (stage: ApplicationStage, message: WebSocketData) => {
     if (socket && socket.readyState === WebSocket.OPEN) {
-      socket.send(message);
+      socket.send(JSON.stringify({
+        stage: stage,
+        data: message
+      }));
+
     } else {
       console.log("Conexão WebSocket não está aberta.");
     }
   };
 
+  const triggerOnMessage = (data: any) => {
+    setMessage(data);
+  };
+
   return (
-    <WebSocketContext.Provider value={{ messages, sendMessage }}>
+    <WebSocketContext.Provider value={{ message, sendMessage, triggerOnMessage }}>
       {children}
     </WebSocketContext.Provider>
   );
