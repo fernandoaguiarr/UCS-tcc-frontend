@@ -25,4 +25,4 @@ COPY --from=build /app/dist /var/www/html/
 EXPOSE 3000
 
 # Inicialize o Nginx
-ENTRYPOINT ["nginx", "-g", "daemon off;"]
+CMD ["nginx", "-g", "daemon off;"]
