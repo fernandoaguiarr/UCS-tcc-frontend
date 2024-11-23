@@ -21,8 +21,8 @@ COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 # Copie os arquivos da build para o diretório do Nginx
 COPY --from=build /app/dist /var/www/html/
 
-# Exponha a porta 3000
-EXPOSE 3000
+# # Exponha a porta 3000
+# EXPOSE ${PORT}
 
 # Inicialize o Nginx
 CMD ["nginx", "-g", "daemon off;"]
