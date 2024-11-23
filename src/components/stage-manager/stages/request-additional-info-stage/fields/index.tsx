@@ -1,22 +1,22 @@
 
-import { MenuItem, Select, SelectChangeEvent, FormControl, InputLabel, RadioGroup, FormLabel, FormControlLabel, Radio, FormGroup, Checkbox, TextField } from "@mui/material";
+import { MenuItem, Select, SelectChangeEvent, FormControl, InputLabel, RadioGroup, FormLabel, FormControlLabel, Radio, FormGroup, Checkbox } from "@mui/material";
 import React, { PropsWithChildren, } from "react"
 
-const _Input: React.FC<PropsWithChildren<{ field: any, value: any, setValue: any, index: number }>> = ({ field, value, setValue, index }) => {
-    const { attributes } = field;
-    const id: string = attributes?.id || `field_${index}`;
-    const label: string = attributes?.label || `Campo ${index + 1}`;
+// const _Input: React.FC<PropsWithChildren<{ field: any, value: any, setValue: any, index: number }>> = ({ field, value, setValue, index }) => {
+//     const { attributes } = field;
+//     const id: string = attributes?.id || `field_${index}`;
+//     const label: string = attributes?.label || `Campo ${index + 1}`;
 
-    return (
-        <TextField
-            id={id}
-            label={label}
-            variant="outlined"
-            value={value}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => setValue(event.target.value)}
-        />
-    )
-}
+//     return (
+//         <TextField
+//             id={id}
+//             label={label}
+//             variant="outlined"
+//             value={value}
+//             onChange={(event: React.ChangeEvent<HTMLInputElement>) => setValue(event.target.value)}
+//         />
+//     )
+// }
 
 const _Select: React.FC<PropsWithChildren<{ field: any, value: any, setValue: any, index: number }>> = ({ field, value, setValue, index }) => {
     const { attributes, options } = field;
