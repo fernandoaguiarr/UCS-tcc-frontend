@@ -8,9 +8,10 @@ import ApplicationStage from "../../../../utils/enums/application-stage.enum";
 
 
 export const CompletedStage: React.FC<PropsWithChildren<WebSocketData>> = ({ url_files }) => {
-    const { triggerOnMessage } = useWebSocket();
+    const { triggerOnMessage, sendMessage } = useWebSocket();
 
     const handleClick = () => {
+        sendMessage(ApplicationStage.SEND_INITIAL_URL, { "new_extraction": true })
         triggerOnMessage({ "stage": ApplicationStage.SEND_INITIAL_URL });
     }
 
