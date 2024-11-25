@@ -17,6 +17,9 @@ export const WebSocketProvider = ({ children, url }: any) => {
 
     ws.onopen = () => {
       console.log("Conexão WebSocket aberta.");
+      setInterval(() => {
+        ws.send(JSON.stringify({ type: "ping" }));
+      }, 30000);
     };
 
     ws.onmessage = (event: any) => {
